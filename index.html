@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>to DO or not to DO</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="row-fluid">
+      <div class="span12">
+	<p class="text-center">
+	  <a href="#" class="btn btn-large btn-primary disabled" id="dp"></a>
+	</p>
+        <p class="text-center">
+          <a href="#" class="btn btn-large btn-primary disabled" id="hg"></a>
+        </p>
+      </div>
+    </div>
+    <script src="js/jquery-2.0.3.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="js/hourglass.js"></script>
+    <script>
+      var $dp = $("#dp");
+      var $hg = $("#hg");
+      var $hgst = $("#hgst");
+      var rand = function() { return Math.floor(Math.random()*2); };
+      var choose = function() {
+        $dp.text(rand()==0 ? "do" : "not");
+      };
+      var run_event = function() {
+        $hg.text(hg._left);
+      };
+      var stop_event = function() {
+        $hg.text(0);
+        choose();
+      };
+      var pause_event = function() {
+      };
+      var hg = hg_new(1, 30,
+                      {run: run_event,
+                       stop: stop_event});
+      hg_start(hg);
+      $("body").keypress(function(evt) {
+        if(32==evt.which) {
+          if("running"==hg._status) {
+            hg_pause(hg);
+          } else {
+            hg_resume(hg);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
